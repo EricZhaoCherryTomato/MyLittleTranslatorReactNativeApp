@@ -1,0 +1,2 @@
+# MyLittleTranslatorReactNativeApp
+ReactNative
