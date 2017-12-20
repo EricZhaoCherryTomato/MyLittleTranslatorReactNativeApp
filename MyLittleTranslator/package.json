@@ -7,8 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@shoutem/ui": "^0.22.2",
+    "google-translate-api": "^2.3.0",
     "react": "16.0.0",
-    "react-native": "0.51.0"
+    "react-native": "0.51.0",
+    "react-native-power-translator": "^1.0.0",
+    "translate-api": "^0.3.12"
   },
   "devDependencies": {
     "babel-jest": "21.2.0",

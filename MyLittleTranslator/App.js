@@ -1,57 +1,102 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { PowerTranslator, ProviderTypes, Translation } from 'react-native-power-translator';
+import { View, ScrollView, TouchableOpacity, Text, TextInput } from 'react-native';
+//import * as Translator from 'translate-api';
+import {Heading} from '@shoutem/ui'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class PowerTranslatorDemo extends Component {
 
-export default class App extends Component<{}> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
+    constructor() {
+        super();
+        this.state = { languageCode: 'zh-CHS'};
+    }
+    
+
+    render() {
+        const styles = this.getStyles();
+        Translation.setConfig(ProviderTypes.Microsoft, '', this.state.languageCode);
+
+        return (
+            <ScrollView style={styles.container}>
+            <Heading>My Little Translator</Heading>
+                <View style={styles.languageBar}>
+                    <TouchableOpacity onPress={() => { this.changeLanguage('en') }}><Text style={styles.p}>English</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => { this.changeLanguage('zh-CHS') }}><Text style={styles.p}>Chinese</Text></TouchableOpacity>
+                </View>
+                
+                <TextInput
+          style={{height: 40}}
+          ref= {(el) => { this.text = el; }}
+          placeholder="Type here to translate!"
+          onChangeText={ (text) => this.onChangeText(text) }
+        />
+        
+                <View>
+                <Text style={{padding: 10, fontSize: 42}}>
+          {this.state.translated}
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
+                    <PowerTranslator style={styles.title} text="" />
+                </View>
+                
+            </ScrollView>
+            
+        );
+    }
+    onChangeText(text){
+      Translation.get(text).then(translated => {
+        this.setState({translated});
+    });
+      
+      }
+    getTranslate(){
+      //this.forceUpdate();
+      //this.setState(this.state.text);
+      return this.state.text;
+      
+      //Translation.get(text).then(translated => {
+        //this.setState({state = translated});
+        //console.log(translated);
+    //}); 
+      
+    }
+    _handlePress(event) {
+      this.setState(text = "hi");
   }
-}
+    getStyles() {
+        return {
+            container: {
+                padding: 40,
+                backgroundColor: '#FAFAFA',
+            },
+            section: {
+                marginTop: 15,
+                marginBottom: 15,
+            },
+            title: {
+                marginTop: 80,
+                marginBottom: 5,
+                fontWeight: 'bold',
+                fontSize: 38,
+                lineHeight: 38
+            },
+            subtitle: {
+                color: '#B3B3B3',
+            },
+            p: {
+                color: '#828280',
+                lineHeight: 24
+            },
+            languageBar: {
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+            },
+            languageBarItem: {
+                color: '#828280',
+            }
+        }
+    }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+    changeLanguage(languageCode) {
+        this.setState({ languageCode: languageCode });
+    }
+} 
