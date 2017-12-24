@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { PowerTranslator, ProviderTypes, Translation } from 'react-native-power-translator';
-import { View, ScrollView, TouchableOpacity, Text, TextInput } from 'react-native';
+import { View, ScrollView, TouchableOpacity} from 'react-native';
 //import * as Translator from 'translate-api';
-import {Heading} from '@shoutem/ui'
+import {Heading, TextInput, DropDownMenu, Text} from '@shoutem/ui'
 
 export default class PowerTranslatorDemo extends Component {
 
     constructor() {
         super();
-        this.state = { languageCode: 'zh-CHS'};
+        this.state = {
+            languages: [
+                { title: 'Chinese', value: 'zh-CHS' },
+                { title: 'Car B ', value: 'Brand B' },
+                { title: 'Car C', value: 'Brand C' },
+              ],
+            languageCode: 'zh-CHS'
+          }
     }
     
 
@@ -25,17 +32,25 @@ export default class PowerTranslatorDemo extends Component {
                 </View>
                 
                 <TextInput
-          style={{height: 40}}
-          ref= {(el) => { this.text = el; }}
-          placeholder="Type here to translate!"
-          onChangeText={ (text) => this.onChangeText(text) }
-        />
-        
+                    placeholder="Type here to translate!"
+                    onChangeText={ (text) => this.onChangeText(text) }
+                />
+
+                <DropDownMenu
+                styleName="horizontal"
+                options={this.state.languages}
+                selectedOption={this.state.selectedLanguage ? this.state.selectedLanguage : this.state.languages[0]}
+                onOptionSelected={(language) => this.setTargetLanguage(language)}
+                titleProperty="title"
+                valueProperty="value"
+                />
+                <Text>{this.state.selectedLanguage ? this.state.selectedLanguage.value : this.state.languages[0].value}</Text>
+                <Text>{this.state.languageCode}</Text>
+
                 <View>
-                <Text style={{padding: 10, fontSize: 42}}>
-          {this.state.translated}
-        </Text>
-                    <PowerTranslator style={styles.title} text="" />
+                    <Text style={{padding: 10, fontSize: 42}}>
+                        {this.state.translated}
+                    </Text>
                 </View>
                 
             </ScrollView>
@@ -45,9 +60,14 @@ export default class PowerTranslatorDemo extends Component {
     onChangeText(text){
       Translation.get(text).then(translated => {
         this.setState({translated});
-    });
-      
-      }
+        });
+    }
+
+    setTargetLanguage(language){
+        this.setState({ selectedLanguage: language });
+        this.setState({ languageCode: language.value });
+    }
+
     getTranslate(){
       //this.forceUpdate();
       //this.setState(this.state.text);
