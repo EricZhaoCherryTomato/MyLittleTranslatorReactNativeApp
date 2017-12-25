@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { PowerTranslator, ProviderTypes, Translation } from 'react-native-power-translator';
 import { View, ScrollView, TouchableOpacity} from 'react-native';
-//import * as Translator from 'translate-api';
 import {Heading, TextInput, DropDownMenu, Text} from '@shoutem/ui'
+import * as Constants from './Constants'
 
 export default class PowerTranslatorDemo extends Component {
 
@@ -21,7 +21,7 @@ export default class PowerTranslatorDemo extends Component {
 
     render() {
         const styles = this.getStyles();
-        Translation.setConfig(ProviderTypes.Microsoft, '', this.state.languageCode);
+        Translation.setConfig(ProviderTypes.Microsoft, Constants.TranslatorKey, this.state.languageCode);
 
         return (
             <ScrollView style={styles.container}>
