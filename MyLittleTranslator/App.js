@@ -46,7 +46,7 @@ export default class PowerTranslatorDemo extends Component {
         return (
             <ScrollView style={styles.container}>
                 <View>
-                    <Heading>My Little Translator</Heading>
+                    <Heading style={{textAlign: 'center', padding: 10}}>My Little Translator</Heading>
                </View>
                 
                 <TextInput
