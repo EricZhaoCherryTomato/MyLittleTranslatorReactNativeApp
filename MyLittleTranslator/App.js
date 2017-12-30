@@ -33,16 +33,6 @@ export default class PowerTranslatorDemo extends Component {
                 { title: 'Hungarian ', value: 'hu' },
                 { title: 'Indonesian ', value: 'id' },
                 { title: 'Italian ', value: 'it' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
-                { title: 'Indonesian ', value: 'id' },
               ],
             languageCode: 'zh-CHS'
           }
@@ -55,11 +45,9 @@ export default class PowerTranslatorDemo extends Component {
 
         return (
             <ScrollView style={styles.container}>
-            <Heading>My Little Translator</Heading>
-                <View style={styles.languageBar}>
-                    <TouchableOpacity onPress={() => { this.changeLanguage('en') }}><Text style={styles.p}>English</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={() => { this.changeLanguage('zh-CHS') }}><Text style={styles.p}>Chinese</Text></TouchableOpacity>
-                </View>
+                <View>
+                    <Heading>My Little Translator</Heading>
+               </View>
                 
                 <TextInput
                     placeholder="Type here to translate!"
@@ -67,15 +55,12 @@ export default class PowerTranslatorDemo extends Component {
                 />
 
                 <DropDownMenu
-                styleName="horizontal"
                 options={this.state.languages}
                 selectedOption={this.state.selectedLanguage ? this.state.selectedLanguage : this.state.languages[0]}
                 onOptionSelected={(language) => this.setTargetLanguage(language)}
                 titleProperty="title"
                 valueProperty="value"
                 />
-                <Text>{this.state.selectedLanguage ? this.state.selectedLanguage.value : this.state.languages[0].value}</Text>
-                <Text>{this.state.languageCode}</Text>
 
                 <View>
                     <Text style={{padding: 10, fontSize: 42}}>
@@ -99,15 +84,7 @@ export default class PowerTranslatorDemo extends Component {
     }
 
     getTranslate(){
-      //this.forceUpdate();
-      //this.setState(this.state.text);
       return this.state.text;
-      
-      //Translation.get(text).then(translated => {
-        //this.setState({state = translated});
-        //console.log(translated);
-    //}); 
-      
     }
     _handlePress(event) {
       this.setState(text = "hi");
