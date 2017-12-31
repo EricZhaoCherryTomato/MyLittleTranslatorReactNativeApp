@@ -73,7 +73,8 @@ export default class PowerTranslatorDemo extends Component {
         );
     }
     onChangeText(text){
-      Translation.get(text).then(translated => {
+      Translation.get(text).then(result => {
+        var translated = result.replace(/\"/g, "");
         this.setState({translated});
         });
     }
