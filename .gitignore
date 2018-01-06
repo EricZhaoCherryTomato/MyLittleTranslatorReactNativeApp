@@ -58,3 +58,5 @@ typings/
 .env
 
 MyLittleTranslator/Constants.js
+MyLittleTranslator/ios/Pods/
+
