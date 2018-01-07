@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { PowerTranslator, ProviderTypes, Translation } from 'react-native-power-translator';
 import { View, ScrollView, TouchableOpacity} from 'react-native';
-import {Heading, TextInput, DropDownMenu, Text} from '@shoutem/ui'
-import * as Constants from './Constants'
+import {Heading, TextInput, DropDownMenu, Text} from '@shoutem/ui';
+import * as Constants from './Constants';
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+  } from 'react-native-admob';
 
 export default class PowerTranslatorDemo extends Component {
 
@@ -44,7 +50,16 @@ export default class PowerTranslatorDemo extends Component {
         Translation.setConfig(ProviderTypes.Microsoft, Constants.TranslatorKey, this.state.languageCode);
 
         return (
+
             <ScrollView style={styles.container}>
+            <View>
+                <AdMobBanner
+                adSize="fullBanner"
+                adUnitID="ca-app-pub-3940256099942544/6300978111"
+                testDevices={[AdMobBanner.simulatorId]}
+                onAdFailedToLoad={error => console.error(error)}
+                />
+            </View>
                 <View>
                     <Heading style={{textAlign: 'center', padding: 10}}>My Little Translator</Heading>
                </View>
